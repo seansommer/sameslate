@@ -111,12 +111,12 @@ button { color: inherit; }
 }
 
 /* Night mode changes only the page backdrop; game panels retain their contrast. */
-html.night-mode, html.night-mode body { background: #070711; }
+html.night-mode, html.night-mode body { background: #020805; }
 .night-mode .app-shell::before {
   background:
-    radial-gradient(ellipse at 18% 0%, rgba(72, 47, 117, .14), transparent 60%),
-    radial-gradient(ellipse at 85% 100%, rgba(17, 75, 99, .10), transparent 60%),
-    linear-gradient(155deg, #0d0a18 0%, #070711 55%, #090d14 100%);
+    radial-gradient(ellipse at 18% 0%, rgba(25, 67, 38, .14), transparent 60%),
+    radial-gradient(ellipse at 85% 100%, rgba(15, 52, 28, .10), transparent 60%),
+    linear-gradient(155deg, #06120a 0%, #020805 55%, #040e08 100%);
 }
 .night-mode .app-shell::after { background: none; }
 
@@ -1255,7 +1255,6 @@ html.night-mode, html.night-mode body { background: #070711; }
 .question-card .question-category { color:#17636c; }
 .question-card h1 { color:#07383e; text-shadow:none; }
 .question-card .blank { color:#137d73; border-color:#e5ac36; }
-html.night-mode body { background:radial-gradient(ellipse at 15% 0%,#0a292d 0,transparent 60%),linear-gradient(145deg,#041317,#071f25); }
 html.night-mode body::before { background-image:none; }
 @media (max-width:600px) { .slate-type-card { padding:14px; } .slate-type-card strong { font-size:22px; } .slate-match-group { padding:14px; } }
 
