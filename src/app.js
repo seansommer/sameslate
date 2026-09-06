@@ -343,7 +343,7 @@ function renderHome() {
         <p class="disclaimer">${escapeHtml(APP_CONFIG.funnyDisclaimer)}</p>
         <div class="button-row center">
           <a class="btn btn-secondary" href="#/instructions">How to Play</a>
-          <a class="btn btn-ghost" href="${state.user ? "#/host" : "#/auth?next=host&access=host"}">Host Login</a>
+          <a class="btn btn-ghost" href="${state.user ? "#/host" : "#/auth?next=host&access=host"}">User Login</a>
         </div>
       </div>
       <div class="hero-card">
