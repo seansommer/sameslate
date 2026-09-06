@@ -343,7 +343,7 @@ function renderHome() {
         <p class="disclaimer">${escapeHtml(APP_CONFIG.funnyDisclaimer)}</p>
         <div class="button-row center">
           <a class="btn btn-secondary" href="#/instructions">How to Play</a>
-          <a class="btn btn-ghost" href="${state.user ? "#/host" : "#/auth?next=host&access=host"}">User Login</a>
+          <a class="btn btn-ghost" href="#/auth?next=join">User Login</a>
         </div>
       </div>
       <div class="hero-card">
@@ -360,7 +360,10 @@ function renderHome() {
         <div class="divider"></div>
         <p class="muted center-text" style="font-size:12px;margin:0">No downloads. Phones, tablets, and computers can all play together.</p>
       </div>
-    </section>`,
+    </section>
+    <div class="button-row center">
+      <a class="btn btn-ghost" href="${state.user ? "#/host" : "#/auth?next=host&access=host"}">Host Login</a>
+    </div>`,
     ""
   );
 }

@@ -1,5 +1,5 @@
 const PREFIX = "sameslate-shell-";
-const CACHE = "sameslate-shell-v5";
+const CACHE = "sameslate-shell-v6";
 const ASSETS = [
   "./",
   "./index.html",
@@ -12,7 +12,7 @@ const ASSETS = [
   "./assets/favicon-48.png",
   "./assets/gameshow-stage.webp",
   "./assets/social-share.jpg",
-  "./src/app.js?v=3",
+  "./src/app.js?v=4",
   "./src/config.js",
   "./src/core.js",
   "./src/data/question-bank.js",
