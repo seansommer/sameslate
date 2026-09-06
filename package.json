@@ -1,0 +1,16 @@
+{
+  "name": "same-slate",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "test:database": "firebase emulators:exec --only database --project demo-same-slate \"node tests/firebase-emulator.mjs\"",
+    "build": "node scripts/build.mjs"
+  },
+  "devDependencies": {
+    "firebase": "12.18.0",
+    "@firebase/rules-unit-testing": "5.0.2",
+    "firebase-tools": "15.29.0"
+  }
+}

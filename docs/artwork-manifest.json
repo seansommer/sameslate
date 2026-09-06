@@ -1,0 +1,23 @@
+{
+  "tool": "built-in image_gen",
+  "assets": [
+    {
+      "key": "background",
+      "prompt": "Use case: stylized-concept\nAsset type: full-bleed website background for a family word matching webgame named Same Slate.\nPrimary request: polished family game-show meets matching word cards.\nScene/backdrop: deep midnight teal and navy, luminous turquoise glows and restrained warm gold accents.\nSubject: white blank playing tiles floating only around the outer edges, subtle celebratory specks and sparse short confetti.\nStyle/medium: premium playful digital 3D illustration with soft believable tile depth, matte ceramic-like cards, clean elegant lighting.\nComposition/framing: landscape canvas 1536x1024. Keep the central 60 percent very quiet and dark with smooth subtle tonal gradients for readable interface content. Edge elements may crop intentionally at the border. No bright objects in the center.\nConstraints: no text, letters, numbers, logos, watermarks, game UI, people, or additional objects. Edge decoration stays understated."
+    },
+    {
+      "key": "social",
+      "prompt": "Use case: ads-marketing\nAsset type: landscape social-share card for the family word matching webgame Same Slate, approximately 1200x630 aspect ratio.\nPrimary request: cohesive premium playful teal and gold game branding with exact large legible heading and matching word cards.\nScene/backdrop: deep midnight teal/navy with luminous turquoise soft accent glow; sparse teal and warm gold confetti.\nSubject: large confident white heading \"Same Slate\" at the upper center, exact smaller subheading below \"Fill the blank. Find your match.\" Two white dimensional playing tiles beneath the subheading, one reads exactly \"ELBOW ____\" and the other reads exactly \"____ FIELD\". The four underscores on each tile should appear as a clear long blank underline.\nStyle/medium: polished playful brand graphic, clean rounded bold sans-serif typography, restrained 3D depth and soft shadows, warm gold accents on the cards.\nComposition/framing: landscape wide canvas with generous safe margins, uncluttered centered hierarchy, every word readable in the thumbnail. Confetti only near outer edges.\nText (verbatim): \"Same Slate\"; \"Fill the blank. Find your match.\"; \"ELBOW ____\"; \"____ FIELD\".\nConstraints: preserve exact spelling and punctuation. No other text, logos, watermarks, people, or interface controls."
+    },
+    {
+      "key": "icon",
+      "prompt": "Use case: logo-brand\nAsset type: square app icon for the family word matching webgame Same Slate.\nPrimary request: bold simple twin overlapping slate/card motif with matching golden underline on each.\nScene/backdrop: solid rich deep teal base covering the whole square canvas.\nSubject: two large overlapping slightly rotated slate/playing cards, one luminous turquoise and one pale warm ivory, each with one short strong warm-gold horizontal underline. The outlines and silhouette should be bold and recognizable.\nStyle/medium: premium playful minimal icon with subtle dimensional depth and crisp edges. Restrained rich teal, turquoise, ivory, and warm gold palette.\nComposition/framing: 1024x1024 square, centered motif fills most of the square, reads cleanly at tiny size, sufficient inner breathing room.\nConstraints: no text, letters, numbers, logos, confetti, tiny detailing, extra shapes, outer rounded-corner cropping, or external border. Canvas must remain a full-bleed square."
+    }
+  ],
+  "notes": [
+    "Generated assets visually inspected. Background center remains quiet and dark.",
+    "Social title, tagline, and matching word-card prompts render correctly.",
+    "Icon original has alpha. Web PNG variants were flattened onto #03363D during raster conversion and downscaled.",
+    "Original compositions retained; share image downscaled to 1200×630 with negligible aspect-ratio rounding."
+  ]
+}

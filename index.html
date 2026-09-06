@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#063941" />
+    <meta name="description" content="A family word-matching game for up to 32 players." />
+    <meta property="og:title" content="Same Slate" />
+    <meta property="og:description" content="Fill the blank. Find your match." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://seansommer.github.io/sameslate/" />
+    <meta property="og:image" content="https://seansommer.github.io/sameslate/assets/social-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Same Slate teal and gold matching word cards" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Same Slate" />
+    <meta name="twitter:description" content="Fill the blank. Find your match." />
+    <meta name="twitter:image" content="https://seansommer.github.io/sameslate/assets/social-share.jpg" />
+    <title>Same Slate</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./assets/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css?v=1" />
+  </head>
+  <body>
+    <div id="app" aria-live="polite">
+      <div class="boot-screen">
+        <div class="logo-mark" aria-hidden="true"><span>?</span></div>
+        <p>Shuffling the slates…</p>
+      </div>
+    </div>
+    <div id="toast-region" class="toast-region" aria-live="assertive" aria-atomic="true"></div>
+    <script type="module" src="./src/app.js?v=1"></script>
+  </body>
+</html>

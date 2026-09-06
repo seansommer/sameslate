@@ -1,0 +1,16 @@
+import { mkdir, rm, cp, readFile, access } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { resolve } from 'node:path';
+const root=resolve(import.meta.dirname,'..');
+const dist=resolve(root,'dist');
+await rm(dist,{recursive:true,force:true});
+await mkdir(dist,{recursive:true});
+for(const file of ['index.html','styles.css','manifest.webmanifest','service-worker.js','assets','src']) await cp(resolve(root,file),resolve(dist,file),{recursive:true});
+const files=['src/app.js','src/core.js','src/slate-core.js','src/config.js','src/data/question-bank.js','src/data/cards.js','src/services/firebase-service.js','src/services/live-ui.js','src/services/messages.js','src/services/storage.js','src/services/effects.js'];
+for(const file of files) execFileSync(process.execPath,['--check',resolve(root,file)],{stdio:'pipe'});
+const html=await readFile(resolve(dist,'index.html'),'utf8');
+for(const match of html.matchAll(/(?:src|href)="\.\/([^"?#]+)/g)) await access(resolve(dist,match[1]));
+const worker=await readFile(resolve(dist,'service-worker.js'),'utf8');
+for(const match of worker.matchAll(/"\.\/([^"?#]+)(?:\?[^"#]*)?"/g)) await access(resolve(dist,match[1]));
+JSON.parse(await readFile(resolve(root,'firebase-database.rules.json'),'utf8'));
+console.log('Static app built; entrypoints, offline assets, JavaScript and JSON validated.');
