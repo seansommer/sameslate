@@ -1,9 +1,9 @@
 const PREFIX = "sameslate-shell-";
-const CACHE = "sameslate-shell-v1";
+const CACHE = "sameslate-shell-v2";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=1",
+  "./styles.css?v=2",
   "./manifest.webmanifest",
   "./assets/icon.svg",
   "./assets/app-icon-192.png",
@@ -12,16 +12,17 @@ const ASSETS = [
   "./assets/favicon-48.png",
   "./assets/gameshow-stage.webp",
   "./assets/social-share.jpg",
-  "./src/app.js?v=1",
+  "./src/app.js?v=2",
   "./src/config.js",
   "./src/core.js",
   "./src/data/question-bank.js",
-  "./src/services/effects.js?v=1",
-  "./src/services/firebase-service.js",
+  "./src/services/effects.js?v=2",
+  "./src/services/firebase-service.js?v=2",
   "./src/services/live-suggestions.js",
   "./src/services/suggestion-quality.js",
   "./src/services/live-ui.js",
-  "./src/services/messages.js",
+  "./src/services/messages.js?v=2",
+  "./src/services/message-identity.js",
   "./src/services/storage.js",
   "./src/slate-core.js",
   "./src/data/cards.js"

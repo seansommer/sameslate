@@ -22,7 +22,7 @@ The built-in card bank is original general vocabulary, not a transcription of a 
 
 Shared email/nickname entry, master/host/player roles, host requests and approvals, custom card submissions and approval/editing, dashboards, game history, round details, game deletion with record rollback, Hall of Fame, player cards, individual/team celebrations, sound settings, synthesized music, mobile layouts, night mode, home links, app icons and offline shell. The footer retains **Created by Sean**.
 
-A shared Message Center supports exact email/nickname lookup, replies, read status and deletion of your own copy. No emails or push notifications are sent. Existing family-trust login remains unchanged.
+Every player receives a permanent 16-character alphanumeric Message ID, shared across both games. Message Center shows the ID and nickname with a copy button. New messages require the recipient’s ID and current nickname; emails are not used as message addresses. Replies, read status and deletion of your own copy remain available. Existing players receive their ID automatically when they sign in or open Message Center. Game login remains unchanged. See [Message ID setup](docs/MESSAGE_IDS.md).
 
 ## Shared Firebase project
 

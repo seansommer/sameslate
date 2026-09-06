@@ -1,3 +1,4 @@
+import { createMessageId, messageLookupKey } from "./message-identity.js";
 import { applySlateResults, MATCH_SCORING } from "../slate-core.js";
 import { APP_CONFIG } from "../config.js";
 import {
@@ -62,6 +63,7 @@ export class FirebaseGameService {
     return this.api.onAuthStateChanged(this.auth, async (user) => {
       try {
         this.profile = user ? await this.loadProfileForAuth(user) : null;
+        if (this.profile) await this.prepareMessageIdentity();
         callback(this.profile ? this.toAppUser(user, this.profile) : null, this.profile);
       } catch (error) {
         console.error("Could not restore the signed-in profile.", error);
@@ -156,6 +158,7 @@ export class FirebaseGameService {
     }
     await this.api.set(this.api.ref(this.db, `sessions/${authUser.uid}`), { profileId, loginKey });
     this.profile = { ...profile, profileId };
+    await this.prepareMessageIdentity();
     return this.toAppUser(authUser, this.profile);
   }
 
@@ -172,6 +175,7 @@ export class FirebaseGameService {
     const profile = await this.getProfile(profileId);
     if (!profile) throw appError("PLAYER_NOT_FOUND", "That player profile is no longer available.");
     this.profile = { ...profile, profileId };
+    await this.prepareMessageIdentity();
     return this.toAppUser(authUser, this.profile);
   }
 
@@ -189,13 +193,70 @@ export class FirebaseGameService {
     return snapshot.exists() ? snapshot.val() : null;
   }
 
+  async prepareMessageIdentity() {
+    try {
+      return await this.ensureMessageIdentity();
+    } catch (error) {
+      // A pending rules update must not prevent an existing player from signing in.
+      console.warn("Message ID setup will retry in Message Center.", error.code || error.message);
+      return null;
+    }
+  }
+
+  async ensureMessageIdentity() {
+    const uid = this.identityUid();
+    if (!uid) throw new Error("Find your player before opening Message Center.");
+    if (this.messageIdentityTask?.uid === uid) return this.messageIdentityTask.promise;
+    const promise = this.provisionMessageIdentity(uid);
+    this.messageIdentityTask = { uid, promise };
+    try { return await promise; }
+    finally { if (this.messageIdentityTask?.promise === promise) this.messageIdentityTask = null; }
+  }
+
+  async provisionMessageIdentity(uid) {
+    for (let attempt = 0; attempt < 8; attempt++) {
+      const profile = await this.getProfile(uid);
+      if (!profile) throw new Error("That player profile is no longer available.");
+      const messageId = profile.messageId || createMessageId();
+      const key = await messageLookupKey(messageId, profile.displayName);
+      if (profile.messageId && profile.messageLookupKey === key) {
+        if (this.identityUid() === uid) this.profile = { ...profile, profileId: uid };
+        return { messageId, displayName: profile.displayName };
+      }
+      const updates = {
+        [`users/${uid}/messageId`]: messageId,
+        [`users/${uid}/messageLookupKey`]: key,
+        [`messageIds/${messageId}`]: uid,
+        [`messageLookup/${key}`]: uid
+      };
+      if (profile.messageLookupKey && profile.messageLookupKey !== key) updates[`messageLookup/${profile.messageLookupKey}`] = null;
+      try {
+        // Claim both directions together. Rules reject duplicate IDs and prevent
+        // two devices from assigning different IDs to the same player.
+        await this.api.update(this.api.ref(this.db), updates);
+        if (this.identityUid() === uid) this.profile = { ...profile, profileId: uid, messageId, messageLookupKey: key };
+        return { messageId, displayName: profile.displayName };
+      } catch (error) {
+        if (!/permission.?denied/i.test(String(error.code || error.message))) throw error;
+        const latest = await this.getProfile(uid);
+        if (latest?.messageId && (latest.messageId !== messageId || latest.displayName !== profile.displayName)) continue;
+        let occupied;
+        try { occupied = await this.api.get(this.api.ref(this.db, `messageIds/${messageId}`)); }
+        catch { throw appError("MESSAGE_SETUP_REQUIRED", "Message IDs are not available yet. Ask the host to finish the message setup, then try again."); }
+        if (!profile.messageId && occupied.exists() && occupied.val() !== uid) continue;
+        throw appError("MESSAGE_SETUP_REQUIRED", "Message IDs are not available yet. Ask the host to finish the message setup, then try again.");
+      }
+    }
+    throw new Error("Your Message ID could not be assigned. Please try again.");
+  }
+
   async updateDisplayName(displayName) {
     const cleanName = String(displayName || "").trim();
     if (!normalizeNickname(cleanName)) {
       throw appError("INVALID_NICKNAME", "Your nickname needs at least one letter or number.");
     }
     const uid = this.identityUid();
-    const oldProfile = this.profile || { ...(await this.getProfile(uid)), profileId: uid };
+    const oldProfile = { ...(await this.getProfile(uid)), profileId: uid };
     const [gamesSnapshot, statsSnapshot] = await Promise.all([
       this.api.get(this.api.ref(this.db, `sameSlateUserGames/${uid}`)),
       this.api.get(this.api.ref(this.db, `sameSlatePlayerStats/${uid}`))
@@ -223,6 +284,14 @@ export class FirebaseGameService {
       if (game?.hostUid === uid) updates[`games/${gameId}/hostDisplayName`] = cleanName;
     }
     if (otherStatsSnapshot?.exists()) updates[`playerStats/${uid}/displayName`] = cleanName;
+
+    if (oldProfile.messageId) {
+      const key = await messageLookupKey(oldProfile.messageId, cleanName);
+      updates[`users/${uid}/messageLookupKey`] = key;
+      updates[`messageLookup/${key}`] = uid;
+      if (oldProfile.messageLookupKey && oldProfile.messageLookupKey !== key) updates[`messageLookup/${oldProfile.messageLookupKey}`] = null;
+      oldProfile.messageLookupKey = key;
+    }
 
     if (oldProfile.authProvider === "anonymous") {
       const newLoginKey = await makePlayerLoginKey(oldProfile.email, cleanName);
@@ -266,26 +335,26 @@ export class FirebaseGameService {
       .map(([id, value]) => ({ id, ...value })).sort((a, b) => b.createdAt - a.createdAt)), onError);
   }
 
-  async sendMessage({ email, displayName, body, replyTo = null }) {
+  async sendMessage({ messageId, displayName, body, replyTo = null }) {
     const fromUid = this.identityUid();
     const text = String(body || "").trim();
     if (!text || text.length > 2000) throw new Error("Write a message of 1–2,000 characters.");
     let toUid;
     let toName;
+    let recipientKey;
     if (replyTo) {
       const prior = await this.api.get(this.api.ref(this.db, `mailboxes/${fromUid}/${replyTo.id}`));
       if (!prior.exists() || prior.val().toUid !== fromUid || prior.val().fromUid !== replyTo.uid) throw new Error("That message is no longer available to reply to.");
       toUid = prior.val().fromUid; toName = prior.val().fromName;
     } else {
-      this.validatePlayerInput(email, displayName);
-      const key = await makePlayerLoginKey(email, displayName);
-      const target = await this.api.get(this.api.ref(this.db, `loginLookup/${key}`));
-      if (!target.exists()) throw new Error("No player has that email and nickname. Check both and try again.");
+      recipientKey = await messageLookupKey(messageId, displayName);
+      const target = await this.api.get(this.api.ref(this.db, `messageLookup/${recipientKey}`));
+      if (!target.exists()) throw new Error("No player has that Message ID and nickname together. Check both and try again.");
       toUid = target.val(); toName = String(displayName).trim().slice(0, 30);
     }
     if (toUid === fromUid) throw new Error("Choose another player to message.");
     const id = this.api.push(this.api.ref(this.db, `mailboxes/${fromUid}`)).key;
-    const message = { fromUid, toUid, fromName: this.profile.displayName, toName, body: text, createdAt: this.api.serverTimestamp() };
+    const message = { fromUid, toUid, fromName: this.profile.displayName, toName, body: text, createdAt: this.api.serverTimestamp(), ...(replyTo ? { replyToId: replyTo.id } : { recipientKey }) };
     await this.api.update(this.api.ref(this.db), { [`mailboxes/${fromUid}/${id}`]: message, [`mailboxes/${toUid}/${id}`]: message });
     return id;
   }

@@ -1252,3 +1252,7 @@ html.night-mode, html.night-mode body { background: #070711; }
 html.night-mode body { background:radial-gradient(ellipse at 15% 0%,#0a292d 0,transparent 60%),linear-gradient(145deg,#041317,#071f25); }
 html.night-mode body::before { background-image:none; }
 @media (max-width:600px) { .slate-type-card { padding:14px; } .slate-type-card strong { font-size:22px; } .slate-match-group { padding:14px; } }
+
+.message-identity { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
+.message-id-display { font-family: ui-monospace, monospace; font-size: 1.15rem; font-weight: 700; letter-spacing: .08em; }
+.message-id-entry { text-transform: uppercase; }

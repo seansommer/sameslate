@@ -19,3 +19,5 @@ Finished games update `sameSlatePlayerStats` through per-player transactions key
 ## Messages
 
 `mailboxes/{profileId}/{messageId}` stores separate sender/recipient copies. Writes use one atomic update, server timestamps, a 2,000-character limit and validated sender identity. Each player can read only their mailbox, reply to received messages, mark received messages read, and delete their own copy. Master role does not grant mailbox reading. This preserves the existing family-trust identity model; email ownership is not verified.
+
+Players have an immutable `users/{profileId}/messageId` and a `messageLookupKey` derived from their ID and normalized nickname. `messageIds/{id}` reserves each ID once, and `messageLookup/{hash}` resolves an exact ID/nickname pair. ID assignment updates the profile and both indexes atomically. Nickname changes update the lookup atomically without changing the ID. Rules require a valid current recipient lookup or proof of a received message for replies. Direct directory listing is denied.
