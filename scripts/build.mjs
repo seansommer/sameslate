@@ -6,7 +6,7 @@ const dist=resolve(root,'dist');
 await rm(dist,{recursive:true,force:true});
 await mkdir(dist,{recursive:true});
 for(const file of ['index.html','styles.css','manifest.webmanifest','service-worker.js','assets','src']) await cp(resolve(root,file),resolve(dist,file),{recursive:true});
-const files=['src/app.js','src/core.js','src/slate-core.js','src/config.js','src/data/question-bank.js','src/data/cards.js','src/services/firebase-service.js','src/services/live-ui.js','src/services/messages.js','src/services/storage.js','src/services/effects.js'];
+const files=['src/app.js','src/core.js','src/slate-core.js','src/config.js','src/data/question-bank.js','src/data/cards.js','src/services/firebase-service.js','src/services/live-ui.js','src/services/messages.js','src/services/storage.js','src/services/effects.js','src/services/music.js'];
 for(const file of files) execFileSync(process.execPath,['--check',resolve(root,file)],{stdio:'pipe'});
 const html=await readFile(resolve(dist,'index.html'),'utf8');
 for(const match of html.matchAll(/(?:src|href)="\.\/([^"?#]+)/g)) await access(resolve(dist,match[1]));

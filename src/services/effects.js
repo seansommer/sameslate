@@ -1,3 +1,5 @@
+import { THEMES } from "./music.js";
+
 const SOUND_PREFERENCE_KEY = "sameslate.soundEnabled.v1";
 const EFFECTS_VOLUME_KEY = "sameslate.effectsVolume.v1";
 const MUSIC_VOLUME_KEY = "sameslate.musicVolume.v1";
@@ -9,61 +11,6 @@ const LEGACY_KEYS = {
 
 const DEFAULT_EFFECTS_VOLUME = 1;
 const DEFAULT_MUSIC_VOLUME = 0.34;
-// Two original synthesized loops share the same music-volume control. The
-// home cue is a calm quiz-show homage; the game cue is a playful, relaxed
-// racing-style focus loop. Neither reproduces an existing program's melody.
-const HOME_MELODY = Object.freeze([
-  [0, 293.66, 0.58],
-  [1, 392.0, 0.42],
-  [2, 349.23, 0.62],
-  [3.25, 440.0, 0.36],
-  [4, 329.63, 0.58],
-  [5.5, 493.88, 0.36],
-  [6.25, 440.0, 0.7],
-  [8, 261.63, 0.58],
-  [9, 349.23, 0.42],
-  [10.25, 415.3, 0.46],
-  [11, 392.0, 0.78],
-  [12.5, 329.63, 0.46],
-  [13.5, 293.66, 0.46],
-  [14.5, 349.23, 0.82]
-]);
-const HOME_BASS = Object.freeze([
-  [0, 146.83],
-  [4, 130.81],
-  [8, 164.81],
-  [12, 110.0]
-]);
-const GAME_MELODY = Object.freeze([
-  [0, 293.66, 0.48],
-  [1, 369.99, 0.38],
-  [2, 440.0, 0.52],
-  [3, 493.88, 0.32],
-  [4, 440.0, 0.62],
-  [5.5, 369.99, 0.34],
-  [6.25, 329.63, 0.64],
-  [8, 261.63, 0.48],
-  [9, 329.63, 0.38],
-  [10, 392.0, 0.52],
-  [11.25, 440.0, 0.32],
-  [12, 392.0, 0.62],
-  [13.5, 329.63, 0.34],
-  [14.25, 293.66, 0.72]
-]);
-const GAME_BASS = Object.freeze([
-  [0, 146.83],
-  [2, 146.83],
-  [4, 123.47],
-  [6, 123.47],
-  [8, 130.81],
-  [10, 130.81],
-  [12, 110.0],
-  [14, 110.0]
-]);
-const THEMES = Object.freeze({
-  home: { beatSeconds: 0.42, loopBeats: 16, melody: HOME_MELODY, bass: HOME_BASS, melodyVolume: 0.048, bassVolume: 0.032 },
-  game: { beatSeconds: 0.36, loopBeats: 16, melody: GAME_MELODY, bass: GAME_BASS, melodyVolume: 0.043, bassVolume: 0.026 }
-});
 
 let audioContext = null;
 let masterBus = null;

@@ -2,8 +2,10 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
+import { THEMES } from "../src/services/music.js";
 
 const source = readFileSync(new URL("../src/services/effects.js", import.meta.url), "utf8")
+  .replace('import { THEMES } from "./music.js";', "")
   .replace("export const soundEffects", "const soundEffects");
 const keys = {
   sound: "sameslate.soundEnabled.v1",
@@ -77,7 +79,7 @@ function createAudio({ preferences = {}, storageBlocked = false, supported = tru
   const window = { ...eventTarget(), AudioContext: supported ? FakeContext : undefined };
   const navigator = { audioSession };
   const sandbox = {
-    window, document, navigator,
+    window, document, navigator, THEMES,
     localStorage: {
       getItem(key) { if (storageBlocked) throw new Error("Storage blocked"); return stored.get(key) ?? null; },
       setItem(key, value) { if (storageBlocked) throw new Error("Storage blocked"); stored.set(key, value); },

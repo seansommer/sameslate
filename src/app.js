@@ -27,7 +27,7 @@ import {
   summarizeGame
 } from "./core.js";
 import { buildQuestionQueue, cleanQuestionStarter, promptFromQuery } from "./data/question-bank.js";
-import { soundEffects } from "./services/effects.js?v=2";
+import { soundEffects } from "./services/effects.js?v=3";
 import { FirebaseGameService } from "./services/firebase-service.js?v=2";
 import { fetchLiveSuggestions } from "./services/live-suggestions.js";
 import { sessionStore } from "./services/storage.js";
@@ -223,7 +223,7 @@ function showSoundSettings() {
           <div class="sound-slider-row">
             <div class="sound-slider-label"><label for="music-volume">Background music</label><output id="music-volume-value" for="music-volume">${Math.round(soundEffects.musicVolume * 100)}%</output></div>
             <input class="sound-range" id="music-volume" type="range" min="0" max="100" step="1" value="${Math.round(soundEffects.musicVolume * 100)}" />
-            <p>Controls both the calm homepage theme and the playful focus music during open-answer rounds.</p>
+            <p>Same Slate originals: “Same Wavelength” on the homepage and “Little Matches” during open-answer rounds.</p>
           </div>
           <div class="sound-slider-row">
             <div class="sound-slider-label"><label for="effects-volume">Game sound effects</label><output id="effects-volume-value" for="effects-volume">${Math.round(soundEffects.effectsVolume * 100)}%</output></div>
