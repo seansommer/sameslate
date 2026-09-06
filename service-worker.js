@@ -1,9 +1,9 @@
 const PREFIX = "sameslate-shell-";
-const CACHE = "sameslate-shell-v7";
+const CACHE = "sameslate-shell-v8";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=5",
+  "./styles.css?v=6",
   "./manifest.webmanifest",
   "./assets/icon.svg",
   "./assets/app-icon-192.png",

@@ -72,8 +72,8 @@ button { color: inherit; }
   place-items: center;
   border: 5px solid var(--gold);
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--violet), #167ae5 62%, var(--cyan));
-  box-shadow: 0 0 0 9px rgba(14, 169, 155, 0.2), 0 0 38px rgba(32, 219, 200, 0.35);
+  background: linear-gradient(145deg, #1c7548, #17633e 62%, #0f5435);
+  box-shadow: 0 0 0 9px rgba(23, 130, 76, 0.2), 0 0 38px rgba(57, 185, 128, 0.35);
   color: #fff4b4;
   font: 800 58px/1 var(--font-display);
   transform: rotate(-6deg);
@@ -154,9 +154,9 @@ html.night-mode, html.night-mode body { background: #020805; }
   place-items: center;
   border: 3px solid var(--gold);
   border-radius: 50%;
-  background: linear-gradient(145deg, var(--violet), #168be8);
+  background: linear-gradient(145deg, #1c7548, #0f5435);
   color: #fff1a2;
-  box-shadow: 0 0 18px rgba(32, 219, 200, 0.28);
+  box-shadow: 0 0 18px rgba(57, 185, 128, 0.28);
 }
 .brand-badge svg { width: 25px; height: 25px; }
 
