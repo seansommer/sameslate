@@ -156,6 +156,7 @@ function topbar() {
         <span class="brand-badge" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10 12 3l9 7M5 9v11h14V9M9 13h6M9 16h6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" /></svg></span><span class="brand-name">${escapeHtml(APP_CONFIG.title)}</span>
       </a>
       <div class="top-actions">
+        <a class="game-center-link" href="https://seansommer.github.io/gamecenter/" target="_top" aria-label="Return to Game Center" title="Game Center"><img src="./assets/game-center-icon.png" width="36" height="36" alt="" /></a>
         ${state.user ? `<button id="profile-card-button" class="user-chip" type="button" title="Open lifetime player card" aria-label="Open ${escapeHtml(displayName)}'s lifetime player card">${escapeHtml(displayName)}</button>` : ""}
         <button id="sound-toggle" class="btn btn-ghost btn-small sound-toggle ${soundEffects.enabled ? "" : "muted-sound"}" type="button" aria-label="Toggle game sounds"><span class="sound-icon" aria-hidden="true">${soundEffects.enabled ? "🔊" : "🔇"}</span><span class="sound-label">${soundEffects.enabled ? "SOUND ON" : "SOUND OFF"}</span></button>
         <button id="night-mode-toggle" class="btn btn-ghost btn-small night-mode-toggle ${state.nightMode ? "night-mode-active" : ""}" type="button" aria-label="Night mode" aria-pressed="${state.nightMode}" title="Turn night mode ${state.nightMode ? "off" : "on"}"><svg class="night-mode-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.7 14.2A9 9 0 0 1 9.8 3.3 9 9 0 1 0 20.7 14.2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" /></svg><span class="night-mode-label">NIGHT ${state.nightMode ? "ON" : "OFF"}</span></button>
@@ -167,7 +168,7 @@ function topbar() {
 }
 
 function legalFooter() {
-  return `<footer class="legal-footer"><a class="slate-wordmark" href="#/home">SAME <span>SLATE</span></a><p>${escapeHtml(APP_CONFIG.officialDisclaimer)}</p><p class="creator-credit"><strong>Created by Sean</strong></p></footer>`;
+  return `<footer class="legal-footer"><a class="slate-wordmark" href="#/home">SAME <span>SLATE</span></a><p>${escapeHtml(APP_CONFIG.officialDisclaimer)}</p><a class="game-center-footer" href="https://seansommer.github.io/gamecenter/" target="_top"><img src="./assets/game-center-icon.png" width="24" height="24" alt="" /><span>Game Center</span></a><p class="creator-credit"><strong>Created by Sean</strong></p></footer>`;
 }
 
 function layout(content, pageClass = "") {

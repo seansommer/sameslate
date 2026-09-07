@@ -94,7 +94,7 @@ button { color: inherit; }
   position: fixed;
   z-index: -2;
   inset: 0;
-  background: linear-gradient(rgba(4, 30, 35, 0.24), rgba(4, 30, 35, 0.92)),
+  background: linear-gradient(rgba(3, 24, 14, 0.12), rgba(3, 20, 12, 0.48)),
     url("./assets/gameshow-stage.webp") center top / cover no-repeat;
 }
 
@@ -104,10 +104,7 @@ button { color: inherit; }
   z-index: -1;
   inset: 0;
   pointer-events: none;
-  background-image:
-    radial-gradient(circle at 12% 14%, rgba(255, 209, 102, 0.2) 0 2px, transparent 3px),
-    radial-gradient(circle at 83% 17%, rgba(32, 219, 200, 0.2) 0 2px, transparent 3px);
-  background-size: 94px 94px, 127px 127px;
+  background: none;
 }
 
 /* Night mode changes only the page backdrop; game panels retain their contrast. */
@@ -1261,3 +1258,15 @@ html.night-mode body::before { background-image:none; }
 .message-identity { margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--line); }
 .message-id-display { font-family: ui-monospace, monospace; font-size: 1.15rem; font-weight: 700; letter-spacing: .08em; }
 .message-id-entry { text-transform: uppercase; }
+
+/* The collection lives alongside the game’s existing navigation. */
+.game-center-link { display:inline-grid; place-items:center; flex:0 0 36px; width:36px; height:40px; border-radius:11px; text-decoration:none; }
+.game-center-link img { display:block; width:32px; height:32px; border-radius:9px; box-shadow:0 2px 8px #0004; }
+.game-center-link:hover img { box-shadow:0 0 0 2px #ffbd5599; }
+.game-center-link:focus-visible, .game-center-footer:focus-visible { outline:2px solid #ffbd55; outline-offset:4px; }
+.game-center-footer { display:inline-flex; align-items:center; gap:8px; color:#dbbd89; font-size:10px; font-weight:700; text-decoration:none; min-height:36px; }
+.game-center-footer img { border-radius:7px; }
+@media(max-width:360px) { .topbar:has(.refresh-game) .top-actions { flex-wrap:wrap; } .topbar:has(.refresh-game) .user-chip { min-width:44px; } }
+
+/* Green glyphs and green icon surfaces distinguish Same Slate. */
+.brand-badge, .logo-question { color:#d3f7d9; }

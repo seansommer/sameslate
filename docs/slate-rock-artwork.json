@@ -1,0 +1,11 @@
+{
+  "asset": "assets/gameshow-stage.webp",
+  "mode": "built-in imagegen edit",
+  "source": "assets/gameshow-stage.webp (previous version)",
+  "prompt": "Use case: precise-object-edit.\nAsset type: Same Slate game website background.\nInput image: the attached existing background is the edit target.\nPrimary request: Replace only the broad smooth blue/teal background surface and dot-speckled texture with convincing dark green/charcoal natural slate rock. The user likes the existing landscape composition and floating white slate cards along the outer edges, and does not want new sizing or framing.\nMaterials/textures: slate stone with visible layered mineral striations, fine broad natural fissures and subtle uneven rock grain. The entire broad empty central surface must clearly read as natural slate rock when it is center-cropped for a tall phone screen. Keep the stone dark and restrained, low-contrast but appreciable tactile relief, forest-green undertone in charcoal, calm enough behind game controls. Natural cleft stone, not tiled stone, marble, concrete, polished granite or a dotted star field.\nInvariants: preserve the landscape aspect ratio, existing card locations, angles, scale, cream white card surfaces with gold edges, and outer gold confetti arrangement as closely as possible. Keep all artwork clustered along the same outer edges; the center stays empty of objects. Preserve the overall depth and tasteful lighting.\nReplace blue/teal luminous backdrop with dark green/charcoal slate. Remove dot speckles and glowing star-like dots from the rock texture; retain the physical ribbon-shaped gold confetti at the edges.\nNo added text, no logo, no additional cards, no new objects, no border. Change the surface texture and green tone only, maintaining the existing composition.",
+  "processing": "Sharp WebP conversion, quality 85, effort 6, no resize or crop",
+  "dimensions": {
+    "width": 1536,
+    "height": 1024
+  }
+}

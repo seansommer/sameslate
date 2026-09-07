@@ -1,18 +1,19 @@
 const PREFIX = "sameslate-shell-";
-const CACHE = "sameslate-shell-v9";
+const CACHE = "sameslate-shell-v10";
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css?v=6",
+  "./styles.css?v=7",
   "./manifest.webmanifest",
   "./assets/icon.svg",
   "./assets/app-icon-192.png",
   "./assets/app-icon-512.png",
   "./assets/apple-touch-icon.png",
+  "./assets/game-center-icon.png",
   "./assets/favicon-48.png",
   "./assets/gameshow-stage.webp",
   "./assets/social-share.jpg",
-  "./src/app.js?v=5",
+  "./src/app.js?v=6",
   "./src/config.js",
   "./src/core.js",
   "./src/data/question-bank.js",
